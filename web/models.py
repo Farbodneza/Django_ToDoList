@@ -8,6 +8,8 @@ class Category(models.Model):
     create_at = models.DateTimeField(auto_now_add=True)
     def __str__(self):
         return self.name
+    def __unicode__(self):
+        return self.name
 
 class Task(models.Model):
     PRIORITY = {
@@ -32,3 +34,5 @@ class Task(models.Model):
     
     def __str__(self):
         return self.title
+    def __unicode__(self):
+        return "{}-{}".format(self.category, self.title)
