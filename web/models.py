@@ -4,12 +4,6 @@ from django.contrib.auth.models import User
 
 
 
-class Token(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    token = models.CharField()
-
-
-
 class Category(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='categories')
     name = models.CharField(max_length=100)
@@ -27,9 +21,9 @@ class Task(models.Model):
     }
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='tasks')
     title = models.CharField(max_length=100)
-    description = models.TextField()
+    description = models.TextField(blank=True)
     is_completed = models.BooleanField(default=False)
-    priority = models.CharField(max_length=1, choices=PRIORITY)
+    priority = models.CharField(max_length=1, choices=PRIORITY, default='M')
     dead_line = models.DateTimeField(null=True, blank=True)
     creat_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now_add=True)
